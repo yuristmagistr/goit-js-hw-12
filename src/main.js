@@ -36,12 +36,9 @@ async function onCreateFormSubmit(event) {
   try {
     await fetchImages();
   } catch (error) {
-    console.error(error);
-    iziToast.error({
-      message:
-        'An error occurred while fetching images. Please try again later.',
-      position: 'topRight',
-    });
+      console.error(error);
+  }  finally {
+    loader.style.display = 'none';
   }
 
   event.target.reset();
@@ -53,12 +50,9 @@ async function onLoadMoreItems() {
   try {
     await fetchImages();
   } catch (error) {
-    console.error(error);
-    iziToast.error({
-      message:
-        'An error occurred while fetching images. Please try again later.',
-      position: 'topRight',
-    });
+      console.error(error);
+  } finally {
+    loader.style.display = 'none';
   }
 
   const height = gallery.firstElementChild.getBoundingClientRect().height;
@@ -109,7 +103,7 @@ async function fetchImages() {
   try {
     const response = await axios.get(url);
       const data = response.data;
-      
+
     startPage = Math.ceil(data.totalHits / perPage) || 1;
     if (data.hits.length === 0) {
       iziToast.error({

@@ -13,18 +13,18 @@ const loadMoreBtn = document.querySelector('.load_button');
 const loader = document.querySelector('.loader');
 
 let page;
-let searchTerm = '';
-let maxPage = 1;
+let query = '';
+let startPage = 1;
 
 form.addEventListener('submit', onCreateFormSubmit);
 loadMoreBtn.addEventListener('click', onLoadMoreItems);
 
 async function onCreateFormSubmit(event) {
   event.preventDefault();
-  searchTerm = input.value.trim();
+  query = input.value.trim();
   page = 1;
 
-  if (!searchTerm) {
+  if (!query) {
     return iziToast.error({
       message: 'Please enter a search query.',
       position: 'topRight',
@@ -69,17 +69,48 @@ async function onLoadMoreItems() {
   });
 }
 
+
+
+
+function showLoader() {
+  loader.style.display = 'inline-block';
+}
+
+function hideLoader() {
+  loader.style.display = 'none';
+}
+
+function showLoadBtn() {
+  loadMoreBtn.classList.remove('hidden');
+}
+
+function hideLoadBtn() {
+  loadMoreBtn.classList.add('hidden');
+}
+
+function checkBtnVisibleStatus() {
+  if (page >= startPage) {
+    hideLoadBtn();
+  } else {
+    showLoadBtn();
+  }
+}
+
+
+
+
 async function fetchImages() {
   showLoader();
   checkBtnVisibleStatus();
   const apiKey = '42435479-889f1388d96929484f40a1796';
   const perPage = 15;
-  const url = `https://pixabay.com/api/?key=${apiKey}&q=${searchTerm}&image_type=photo&orientation=horizontal&safesearch=true&page=${page}&per_page=${perPage}`;
+  const url = `https://pixabay.com/api/?key=${apiKey}&q=${query}&image_type=photo&orientation=horizontal&safesearch=true&page=${page}&per_page=${perPage}`;
 
   try {
     const response = await axios.get(url);
-    const data = response.data;
-    maxPage = Math.ceil(data.totalHits / perPage) || 1;
+      const data = response.data;
+      
+    startPage = Math.ceil(data.totalHits / perPage) || 1;
     if (data.hits.length === 0) {
       iziToast.error({
         message:
@@ -119,7 +150,7 @@ async function fetchImages() {
       lightbox.on('show.simplelightbox').refresh();
       hideLoader();
 
-      if (page >= maxPage) {
+      if (page >= startPage) {
         iziToast.info({
           message: "We're sorry, but you've reached the end of search results.",
           position: 'topRight',
@@ -131,28 +162,4 @@ async function fetchImages() {
   }
 
   checkBtnVisibleStatus();
-}
-
-function showLoader() {
-  loader.style.display = 'inline-block';
-}
-
-function hideLoader() {
-  loader.style.display = 'none';
-}
-
-function showLoadBtn() {
-  loadMoreBtn.classList.remove('hidden');
-}
-
-function hideLoadBtn() {
-  loadMoreBtn.classList.add('hidden');
-}
-
-function checkBtnVisibleStatus() {
-  if (page >= maxPage) {
-    hideLoadBtn();
-  } else {
-    showLoadBtn();
-  }
 }

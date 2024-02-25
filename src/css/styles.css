@@ -1,13 +1,3 @@
-/**
-  |============================
-  | include css partials with
-  | default @import url()
-  |============================
-*/
-@import url('./reset.css');
-@import url('./vite-promo.css');
-@import url('./header.css');
-
 :root {
   font-family: Inter, Avenir, Helvetica, Arial, sans-serif;
   font-size: 16px;
@@ -22,4 +12,227 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  color: currentColor;
+  text-decoration: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+img {
+  display: block;
+  width: 100%;
+  height: 200px;
+}
+
+/* стилі */
+
+.form {
+  margin: 20px auto;
+  text-align: center;
+}
+
+section {
+  padding: 36px 156px;
+}
+
+input {
+  border-radius: 4px;
+  padding-left: 16px;
+  border-radius: 4px;
+  border: 1px solid #808080;
+  height: 40px;
+  width: 272px;
+  background-color: #fff;
+  font-family: "Montserrat", sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.5;
+    letter-spacing: 0.04em;
+    color: #808080;
+}
+
+input:active {
+  border-color: #4e75ff;
+}
+
+input:hover {
+  border-color: black;
+}
+
+.button {
+  background-color: #4e75ff;
+  margin-left: 5px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  height: 40px;
+  width: 91px;
+  color: #fff;
+  font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.5;
+    letter-spacing: 0.04em;
+    color: #fff;
+}
+
+.button:hover {
+  background-color: #6c8cff;
+}
+
+.load_button {
+  background-color: #4e75ff;
+  margin-top: 20px;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 8px;
+  height: 40px;
+  width: 125px;
+  color: #fff;
+}
+
+.load_button:hover {
+  background-color: #6c8cff;
+}
+
+.hidden {
+  display: none;
+}
+
+.gallery {
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-top: 32px;
+}
+/* .gallery {
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  column-gap: 25px;
+  row-gap: 25px;
+  padding: 0 10px;
+} */
+
+
+.gallery-item {
+  padding: 0;
+  border: 1px solid #808080;
+  width: calc((100% - 2*24px)/3);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+/* .gallery-item {
+  border: 1px solid #808080;
+  width: 350px;
+  height: 300px;
+} */
+
+
+.gallery-item:hover {
+  transform: scale(1.04);
+}
+
+
+.item-text {
+  display: flex;
+  flex-direction: row;
+  gap: 28px;
+  text-align: center;
+  padding-left: 20px;
+  padding-right: 25px;
+}
+
+/* .item-text {
+  display: flex;
+  flex-direction: row;
+  margin: 6px 10px;
+  gap: 20px;
+} */
+
+
+.item-text ul {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  line-height: 133%;
+  letter-spacing: 0.04em;
+  color: #2e2f42;
+}
+
+/* .item-text ul {
+  font-weight: 600;
+  color: #2e2f42;
+} */
+
+
+.item-text li {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 200%;
+  letter-spacing: 0.04em;
+  color: #2e2f42;
+}
+
+/* .item-text li {
+  font-weight: 400;
+  color: #2e2f42;
+} */
+
+/* для відображення завантаження */
+
+.loader-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loader {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  display: none;
+  position: relative;
+  background: linear-gradient(0deg, rgba(255, 61, 0, 0.2) 33%, #ff3d00 100%);
+  box-sizing: border-box;
+  animation: rotation 1s linear infinite;
+}
+
+.loader::after {
+  content: '';
+  box-sizing: border-box;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #fff;
+}
+
+@keyframes rotation {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
